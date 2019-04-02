@@ -101,7 +101,7 @@ class MovieDetails extends Component {
         artWorkObject:[],
         cast:[{name:"Todo ", character:"Todo", profilePic:"https://via.placeholder.com/100x100"}],
         crew:[],
-        themoviedbAPIKey:"YOUR_API_KEY"
+        themoviedbAPIKey:"f380bc9a98f7d5740dffcf1a55841747"
       }
     }
   
