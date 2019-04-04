@@ -187,6 +187,14 @@ class MovieDetails extends Component {
         this.setState({
 
           originalTitle: snapshot.child("originalTitle").val(),
+          primaryTitle: snapshot.child("primaryTitle").val(),
+          runtimeMinutes: snapshot.child("runtimeMinutes").val(),
+          tconst: snapshot.child("tconst").val(),
+          genres: snapshot.child("genres").val(),
+          titleType: snapshot.child("titleType").val(),
+          endYear: snapshot.child("endYear").val(),
+          startYear: snapshot.child("startYear").val(),
+          
           /* Todo2: like the line above, update the other movie
              attributes listed under the // FROM IMDB TITLE INFO
              in the MovieDetails constructor above
@@ -199,6 +207,8 @@ class MovieDetails extends Component {
       // Umar, Adding working code to get ratings
       let ratingSearches = Object.values(snapshot.val())[0];
       this.setState({
+        averageRating: ratingSearches.averageRating,
+        numVotes: ratingSearches.numVotes,
           /* Todo2: 
           Assign Movie Rating and number of votes received from Firebase,
           as listed in the // FROM IMDB RATINGS INFO section in
@@ -235,13 +245,19 @@ class MovieDetails extends Component {
           /* Todo3: pass the TheMovieDB API key you stored in themoviedbAPIKey as the
              api_key parameter
           */
+          api_key: this.state.themoviedbAPIKey
         }
       }).then(res =>{
         const castAndCrew = res.data;
         /* Todo3: add a this.setState call to update the crew and cast properties, from the
            castAndCrew variable holding the request result
         */
-        
+        //console.log(castAndCrew)
+        this.setState({
+          cast: castAndCrew.cast,
+          //cast: [{name: castAndCrew.cast.name, character: castAndCrew.cast.character, profilePic: castAndCrew.cast.profile_path}]
+          crew: castAndCrew.crew
+       });
       });
     });
   }
