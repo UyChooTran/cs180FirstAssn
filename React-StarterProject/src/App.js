@@ -156,31 +156,21 @@ class App extends Component {
             message={this.state.results.length+" Search Result(s) found successfully!"}
           />
         </Snackbar>
-        {/* Todo: 
-        Create Snackbar UI element with error message,
-        for when user searches and there is no result Firebase or due to some other error.
-
-        This should look very similar to the Snackbar above, but using the this.state.failedOpen
-        state variable and the this.handleFailedClose callback.
-        
-        When uncommenting, be sure to remove the '{' and '}' before and after the comment
-
         <Snackbar
           anchorOrigin={{
             vertical: 'bottom',
             horizontal: 'left',
           }}
-          open=// Assign variable that will control the open state of failure Snackbar
+          open={this.state.failedOpen}// Assign variable that will control the open state of failure Snackbar
           autoHideDuration={6000}
-          onClose=// Assign callback when Snackbar is closed
+          onClose={this.handleFailedClose}// Assign callback when Snackbar is closed
         >
           <MySnackbarContent
-            onClose=// Assign callback when Snackbar is closed
+            onClose={this.handleFailedClose}// Assign callback when Snackbar is closed
             variant="error"
             message="No Results found, try another movie!"
           />
         </Snackbar>
-        */}
       </div>
     );
   }
@@ -191,15 +181,13 @@ class App extends Component {
 
     this.setState({ successOpen: false });
   };
-  /* Todo: 
   handleFailedClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
 
-    // Add a this.setState call here to update the state variable for the failure Snackbar
+    this.setState({ failedOpen: false });// Add a this.setState call here to update the state variable for the failure Snackbar
   };
-  */
   handleChange(e) {
     this.setState({
       [e.target.name]: e.target.value
@@ -243,8 +231,11 @@ class App extends Component {
         /* Todo: 
         No Results found.  As above, add a this.setState call
         to change the variable states to display the failure Snackbar
-        
         */
+        this.setState({
+          successOpen: false,
+          failedOpen: true,
+        });
       }
     });
   }
